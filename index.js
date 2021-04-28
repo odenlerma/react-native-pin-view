@@ -41,7 +41,9 @@ const ViewButton = ({
 
 const ViewInput = ({
   showInputText = false,
+  placeholder = '0',
   inputTextStyle,
+  placeholderTextStyle,
   size = 40,
   customStyle,
   text,
@@ -57,7 +59,13 @@ const ViewInput = ({
           text ? inputFilledStyle : inputEmptyStyle,
           customStyle,
         ]}>
-        <Text style={[PinViewStyle.inputText, inputTextStyle]}>{text}</Text>
+        {placeholder != undefined && text == undefined && (
+            <Text style={[PinViewStyle.inputText, placeholderTextStyle]}>{placeholder}</Text>
+        )}
+        {/*<Text style={[PinViewStyle.inputText, inputTextStyle]}>{text}</Text>*/}
+        {text != undefined && (
+            <View style={[inputTextStyle, {width: size/6, height: size/6, borderRadius: size/12}]}/>
+        )}
       </View>
     )
   } else {
@@ -69,7 +77,8 @@ const ViewInput = ({
           text ? inputFilledStyle : inputEmptyStyle,
           customStyle,
         ]}
-      />
+      >
+      </View>
     )
   }
 }
@@ -96,6 +105,8 @@ const PinView = React.forwardRef(
       buttonTextStyle ,
       inputViewEmptyStyle,
       inputViewFilledStyle,
+      placeholderTextStyle,
+      placeholder,
       showInputText,
       inputTextStyle,
       inputSize,
@@ -150,6 +161,8 @@ const PinView = React.forwardRef(
               showInputText={showInputText}
               inputEmptyStyle={inputViewEmptyStyle}
               inputFilledStyle={inputViewFilledStyle}
+              placeholder={placeholder}
+              placeholderTextStyle={placeholderTextStyle}
               text={input[i]}
               customStyle={inputViewStyle}
               size={inputSize}
