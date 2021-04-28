@@ -1,6 +1,5 @@
 // Type definitions for react-native-pin-view v3.0.0
 // Project: https://github.com/talut/react-native-pin-view
-// Definitions by: Talut TASGIRAN <https://github.com/talut>
 // TypeScript Version: 2.8
 declare module "react-native-pin-view" {
     // @ts-ignore
@@ -46,6 +45,9 @@ declare module "react-native-pin-view" {
         customRightButton?: React.FunctionComponent<any>
         customRightAccessibilityLabel?:string,
         customRightButtonViewStyle?: ViewStyle
+
+        placeholder: string,
+        placeholderTextStyle: ViewStyle
     }
 
     const PinView: React.FunctionComponent<PinViewProps>
