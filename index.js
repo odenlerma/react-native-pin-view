@@ -139,21 +139,12 @@ const PinView = React.forwardRef(
     }
 
     const randomize = async (array = order) => {
-      var currentIndex = array.length,  randomIndex;
+      let shuffle = array
+        .map((value) => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value)
 
-      // While there remain elements to shuffle...
-      while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-
-        // And swap it with the current element.
-        [array[currentIndex], array[randomIndex]] = [
-          array[randomIndex], array[currentIndex]];
-      }
-
-      await setOrder(array);
+      await setOrder(shuffle);
     }
 
     useEffect(() => {
