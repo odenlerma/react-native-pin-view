@@ -41,9 +41,7 @@ const ViewButton = ({
 
 const ViewInput = ({
   showInputText = false,
-  placeholder = '0',
   inputTextStyle,
-  placeholderTextStyle,
   size = 40,
   customStyle,
   text,
@@ -59,13 +57,7 @@ const ViewInput = ({
           text ? inputFilledStyle : inputEmptyStyle,
           customStyle,
         ]}>
-        {placeholder != undefined && text == undefined && (
-            <Text style={[PinViewStyle.inputText, placeholderTextStyle]}>{placeholder}</Text>
-        )}
-        {/*<Text style={[PinViewStyle.inputText, inputTextStyle]}>{text}</Text>*/}
-        {text != undefined && (
-            <View style={[inputTextStyle, {width: size/6, height: size/6, borderRadius: size/12}]}/>
-        )}
+        <Text style={[PinViewStyle.inputText, inputTextStyle]}>{text}</Text>
       </View>
     )
   } else {
@@ -77,8 +69,7 @@ const ViewInput = ({
           text ? inputFilledStyle : inputEmptyStyle,
           customStyle,
         ]}
-      >
-      </View>
+      />
     )
   }
 }
@@ -105,8 +96,6 @@ const PinView = React.forwardRef(
       buttonTextStyle ,
       inputViewEmptyStyle,
       inputViewFilledStyle,
-      placeholderTextStyle,
-      placeholder,
       showInputText,
       inputTextStyle,
       inputSize,
@@ -121,6 +110,7 @@ const PinView = React.forwardRef(
       customRightButtonDisabled,
       customLeftButtonSize = 60,
       customRightButtonSize = 60,
+      numberOrder,
     },
     ref
   ) => {
@@ -161,8 +151,6 @@ const PinView = React.forwardRef(
               showInputText={showInputText}
               inputEmptyStyle={inputViewEmptyStyle}
               inputFilledStyle={inputViewFilledStyle}
-              placeholder={placeholder}
-              placeholderTextStyle={placeholderTextStyle}
               text={input[i]}
               customStyle={inputViewStyle}
               size={inputSize}
@@ -175,9 +163,9 @@ const PinView = React.forwardRef(
             disabled={disabled}
             accessible={accessible}
             activeOpacity={activeOpacity}
-            onButtonPress={() => onButtonPressHandle("one", "1")}
+            onButtonPress={() => onButtonPressHandle(numberOrder[0].key, numberOrder[0].value)}
             buttonSize={buttonSize}
-            text={buttonTextByKey.one}
+            text={buttonTextByKey[numberOrder[0].key]}
             customTextStyle={buttonTextStyle}
             customViewStyle={buttonViewStyle}
           />
@@ -185,9 +173,9 @@ const PinView = React.forwardRef(
             disabled={disabled}
             accessible={accessible}
             activeOpacity={activeOpacity}
-            onButtonPress={() => onButtonPressHandle("two", "2")}
+            onButtonPress={() => onButtonPressHandle(numberOrder[1].key, numberOrder[1].value)}
             buttonSize={buttonSize}
-            text={buttonTextByKey.two}
+            text={buttonTextByKey[numberOrder[1].key]}
             customTextStyle={buttonTextStyle}
             customViewStyle={buttonViewStyle}
           />
@@ -195,9 +183,9 @@ const PinView = React.forwardRef(
             disabled={disabled}
             accessible={accessible}
             activeOpacity={activeOpacity}
-            onButtonPress={() => onButtonPressHandle("three", "3")}
+            onButtonPress={() => onButtonPressHandle(numberOrder[2].key, numberOrder[2].value)}
             buttonSize={buttonSize}
-            text={buttonTextByKey.three}
+            text={buttonTextByKey[numberOrder[2].key]}
             customTextStyle={buttonTextStyle}
             customViewStyle={buttonViewStyle}
           />
@@ -205,9 +193,9 @@ const PinView = React.forwardRef(
             disabled={disabled}
             accessible={accessible}
             activeOpacity={activeOpacity}
-            onButtonPress={() => onButtonPressHandle("four", "4")}
+            onButtonPress={() => onButtonPressHandle(numberOrder[3].key, numberOrder[3].value)}
             buttonSize={buttonSize}
-            text={buttonTextByKey.four}
+            text={buttonTextByKey[numberOrder[3].key]}
             customTextStyle={buttonTextStyle}
             customViewStyle={buttonViewStyle}
           />
@@ -215,9 +203,9 @@ const PinView = React.forwardRef(
             disabled={disabled}
             accessible={accessible}
             activeOpacity={activeOpacity}
-            onButtonPress={() => onButtonPressHandle("five", "5")}
+            onButtonPress={() => onButtonPressHandle(numberOrder[4].key, numberOrder[4].value)}
             buttonSize={buttonSize}
-            text={buttonTextByKey.five}
+            text={buttonTextByKey[numberOrder[4].key]}
             customTextStyle={buttonTextStyle}
             customViewStyle={buttonViewStyle}
           />
@@ -225,9 +213,9 @@ const PinView = React.forwardRef(
             disabled={disabled}
             accessible={accessible}
             activeOpacity={activeOpacity}
-            onButtonPress={() => onButtonPressHandle("six", "6")}
+            onButtonPress={() => onButtonPressHandle(numberOrder[5].key, numberOrder[5].value)}
             buttonSize={buttonSize}
-            text={buttonTextByKey.six}
+            text={buttonTextByKey[numberOrder[5].key]}
             customTextStyle={buttonTextStyle}
             customViewStyle={buttonViewStyle}
           />
@@ -235,9 +223,9 @@ const PinView = React.forwardRef(
             disabled={disabled}
             accessible={accessible}
             activeOpacity={activeOpacity}
-            onButtonPress={() => onButtonPressHandle("seven", "7")}
+            onButtonPress={() => onButtonPressHandle(numberOrder[6].key, numberOrder[6].value)}
             buttonSize={buttonSize}
-            text={buttonTextByKey.seven}
+            text={buttonTextByKey[numberOrder[6].key]}
             customTextStyle={buttonTextStyle}
             customViewStyle={buttonViewStyle}
           />
@@ -245,9 +233,9 @@ const PinView = React.forwardRef(
             disabled={disabled}
             accessible={accessible}
             activeOpacity={activeOpacity}
-            onButtonPress={() => onButtonPressHandle("eight", "8")}
+            onButtonPress={() => onButtonPressHandle(numberOrder[7].key, numberOrder[7].value)}
             buttonSize={buttonSize}
-            text={buttonTextByKey.eight}
+            text={buttonTextByKey[numberOrder[7].key]}
             customTextStyle={buttonTextStyle}
             customViewStyle={buttonViewStyle}
           />
@@ -255,9 +243,9 @@ const PinView = React.forwardRef(
             disabled={disabled}
             accessible={accessible}
             activeOpacity={activeOpacity}
-            onButtonPress={() => onButtonPressHandle("nine", "9")}
+            onButtonPress={() => onButtonPressHandle(numberOrder[8].key, numberOrder[8].value)}
             buttonSize={buttonSize}
-            text={buttonTextByKey.nine}
+            text={buttonTextByKey[numberOrder[8].key]}
             customTextStyle={buttonTextStyle}
             customViewStyle={buttonViewStyle}
           />
@@ -278,9 +266,9 @@ const PinView = React.forwardRef(
             disabled={disabled}
             accessible={accessible}
             activeOpacity={activeOpacity}
-            onButtonPress={() => onButtonPressHandle("zero", "0")}
+            onButtonPress={() => onButtonPressHandle(numberOrder[9].key, numberOrder[9].value)}
             buttonSize={buttonSize}
-            text={buttonTextByKey.zero}
+            text={buttonTextByKey[numberOrder[9].key]}
             customTextStyle={buttonTextStyle}
             customViewStyle={buttonViewStyle}
             buttonSize={customLeftButtonSize}
@@ -330,5 +318,6 @@ PinView.defaultProps = {
   disabled: false,
   customLeftButtonDisabled: false,
   customRightButtonDisabled: false,
+  numberOrder: [{key: 'one', value: '1'}, {key: 'two', value: '2'}, {key: 'three', value: '3'}, {key: 'four', value: '4'}, {key: 'five', value: '5'}, {key: 'six', value: '6'}, {key: 'seven', value: '7'}, {key: 'eight', value: '8'}, {key: 'nine', value: '9'}, {key: 'zero', value: '0'}]
 }
 export default PinView
