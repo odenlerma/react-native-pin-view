@@ -110,11 +110,14 @@ const PinView = React.forwardRef(
       customRightButtonDisabled,
       customLeftButtonSize = 60,
       customRightButtonSize = 60,
-      numberOrder,
+      order,
+      setRandom,
     },
     ref
   ) => {
     const [input, setInput] = useState("")
+    const [numberOrder, setOrder] = useState(order)
+
     ref.current = {
       clear: () => {
         if (input.length > 0) {
@@ -134,6 +137,30 @@ const PinView = React.forwardRef(
         setInput(input + "" + value)
       }
     }
+
+    const randomize = async (array = order) => {
+      var currentIndex = array.length,  randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+      }
+
+      await setOrder(array);
+    }
+
+    useEffect(() => {
+        if(setRandom){
+          randomize()
+        }
+    }, [])
 
     useEffect(() => {
       if (onValueChange!==undefined){
@@ -318,6 +345,7 @@ PinView.defaultProps = {
   disabled: false,
   customLeftButtonDisabled: false,
   customRightButtonDisabled: false,
-  numberOrder: [{key: 'one', value: '1'}, {key: 'two', value: '2'}, {key: 'three', value: '3'}, {key: 'four', value: '4'}, {key: 'five', value: '5'}, {key: 'six', value: '6'}, {key: 'seven', value: '7'}, {key: 'eight', value: '8'}, {key: 'nine', value: '9'}, {key: 'zero', value: '0'}]
+  order: [{key: 'one', value: '1'}, {key: 'two', value: '2'}, {key: 'three', value: '3'}, {key: 'four', value: '4'}, {key: 'five', value: '5'}, {key: 'six', value: '6'}, {key: 'seven', value: '7'}, {key: 'eight', value: '8'}, {key: 'nine', value: '9'}, {key: 'zero', value: '0'}],
+  setRandom: false,
 }
 export default PinView
